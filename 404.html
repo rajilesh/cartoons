@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cartoon Stories | Rajilesh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(1200px 600px at top, #1e293b, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 64px 24px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      max-width: 640px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-svg {
+      margin: 32px auto 0;
+      max-width: 520px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #111827, #020617);
+      border-radius: 16px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px 200px at top left, rgba(56,189,248,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56,189,248,0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .card a svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .card a:hover svg {
+      transform: translateX(4px);
+    }
+
+    footer {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Not Found, Lets See Some Cartoon Stories</h1>
+  <p>A growing collection of short cartoon stories with simple wisdom, satire, and timeless lessons.</p>
+
+  <div class="hero-svg">
+    <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#22c55e"/>
+        </linearGradient>
+      </defs>
+
+      <rect x="0" y="0" width="600" height="280" rx="28" fill="#020617"/>
+
+      <g transform="translate(80 60)">
+        <circle cx="70" cy="60" r="44" fill="url(#g1)" opacity="0.9"/>
+        <circle cx="180" cy="80" r="60" fill="#38bdf8" opacity="0.3"/>
+        <circle cx="320" cy="60" r="40" fill="#22c55e" opacity="0.4"/>
+        <circle cx="420" cy="90" r="70" fill="url(#g1)" opacity="0.25"/>
+      </g>
+
+      <text x="300" y="170" text-anchor="middle" font-size="28" fill="#e5e7eb" font-weight="700">
+        Stories that Think & Smile
+      </text>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section class="grid">
+
+    <article class="card">
+      <h3>Rats and Elephants</h3>
+      <p>A clever tale about size, unity, and unexpected strength.</p>
+      <a href="/cartoons/rats-and-elephants.html">
+        Read story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"/>
+          <path d="M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </article>
+
+    <!-- Copy this card block for every new cartoon story -->
+    <!--
+    <article class="card">
+      <h3>Story Title</h3>
+      <p>One line description of the story.</p>
+      <a href="/cartoons/story-file.html">Read story</a>
+    </article>
+    -->
+
+  </section>
+</main>
+
+<footer>
+  Built with <span>HTML + CSS</span> · Add new stories by dropping HTML files
+</footer>
+
+</body>
+</html>
