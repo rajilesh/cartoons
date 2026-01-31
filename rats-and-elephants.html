@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ആനയും എലികളും - ആനിമേറ്റഡ് കാർട്ടൂൺ സ്റ്റോറി</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Noto Sans Malayalam', system-ui, sans-serif;
+      background: #111;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+    .container {
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .scene.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+    }
+    .image {
+      width: 70vmin;
+      max-height: 45vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      margin-bottom: 20px;
+    }
+    .bubble {
+      background: rgba(255,255,255,0.92);
+      color: #222;
+      padding: 18px 28px;
+      border-radius: 24px;
+      font-size: 1.35rem;
+      line-height: 1.55;
+      margin: 20px auto;
+      max-width: 85%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 14px solid transparent;
+      border-top-color: rgba(255,255,255,0.92);
+    }
+    .title {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      text-shadow: 0 3px 10px black;
+    }
+    .nav {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 25px;
+      z-index: 10;
+    }
+    button {
+      background: rgba(255,80,0,0.85);
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: all 0.3s;
+    }
+    button:hover { background: rgba(255,100,20,1); transform: scale(1.08); }
+    button:disabled { opacity: 0.4; pointer-events: none; }
+    .progress {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      background: rgba(0,0,0,0.5);
+      padding: 6px 16px;
+      border-radius: 30px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="progress">സീൻ <span id="counter">1</span> / 11</div>
+
+  <!-- Scene 1 -->
+  <div class="scene" id="s1" style="background-image: url('https://www.shutterstock.com/shutterstock/photos/683176564/display_1500/stock-vector-the-young-elephant-walking-in-the-lush-forest-683176564.jpg');">
+    <div class="content">
+      <h1 class="title">ആനയും എലികളും</h1>
+      <img src="https://www.shutterstock.com/shutterstock/photos/683176564/display_1500/stock-vector-the-young-elephant-walking-in-the-lush-forest-683176564.jpg" alt="ആന കാട്ടിൽ നടക്കുന്നു" class="image">
+      <div class="bubble">ഒരു പഴയ കാട്ടിൽ ഒരു വലിയ ആന സന്തോഷമായി ജീവിച്ചിരുന്നു...</div>
+    </div>
+  </div>
+
+  <!-- Scene 2 -->
+  <div class="scene" id="s2" style="background-image: url('https://as2.ftcdn.net/jpg/05/68/94/61/1000_F_568946138_C3phJbiYYHbZpCFtFLMzWCvpoxFQKh6n.jpg');">
+    <div class="content">
+      <img src="https://as2.ftcdn.net/jpg/05/68/94/61/1000_F_568946138_C3phJbiYYHbZpCFtFLMzWCvpoxFQKh6n.jpg" alt="എലികളുടെ കുടുംബം" class="image">
+      <div class="bubble">ആനയുടെ വലിയ കാലടികൾ എലികളുടെ ചെറിയ വീടുകൾക്കടുത്തിലൂടെ വരുമ്പോൾ... എലികൾ ഭയന്നു!</div>
+    </div>
+  </div>
+
+  <!-- Scene 3 -->
+  <div class="scene" id="s3">
+    <div class="content">
+      <div class="bubble">"സുഹൃത്തേ, ദയവായി ഞങ്ങളുടെ വഴിയിൽ നിന്ന് അല്പം മാറി നടക്കാമോ?" എന്ന് എലി രാജാവ് ചോദിച്ചു.</div>
+    </div>
+  </div>
+
+  <!-- Scene 4 -->
+  <div class="scene" id="s4">
+    <div class="content">
+      <img src="https://c8.alamy.com/comp/DMCWFK/happy-elephant-cartoon-DMCWFK.jpg" alt="ചിരിക്കുന്ന ആന" class="image">
+      <div class="bubble">ആന ഉറക്കെ ചിരിച്ചു: "ഹഹഹ! നിന്നെപ്പോലൊരു കൊച്ചനെ എന്താ ചെയ്യാൻ പറ്റും? പോടാ!"</div>
+    </div>
+  </div>
+
+  <!-- Scene 5 -->
+  <div class="scene" id="s5">
+    <div class="content">
+      <div class="bubble">എലികൾ വിഷമിച്ചു... "വലുപ്പം കൊണ്ട് മാത്രമല്ലല്ലോ ശക്തി..."</div>
+    </div>
+  </div>
+
+  <!-- Scene 6 -->
+  <div class="scene" id="s6" style="background-image: url('https://i.ytimg.com/vi/qI2oseMdsYA/maxresdefault.jpg');">
+    <div class="content">
+      <img src="https://www.vedantu.com/seo/content-images/75951e4d-526b-46eb-8399-49fee5583722.png" alt="ആന വലയിൽ കുടുങ്ങി" class="image">
+      <div class="bubble">ഒരു ദിവസം വേട്ടക്കാർ വല വിരിച്ചു... ആന പാടെ കുടുങ്ങി!</div>
+    </div>
+  </div>
+
+  <!-- Scene 7 -->
+  <div class="scene" id="s7">
+    <div class="content">
+      <div class="bubble">"ആരെങ്കിലും സഹായിക്കൂ..." ആന നിലവിളിച്ചു.</div>
+    </div>
+  </div>
+
+  <!-- Scene 8 -->
+  <div class="scene" id="s8">
+    <div class="content">
+      <img src="https://cdn.firstcry.com/education/2023/02/06170027/Mouse-Biting-The-Rope.jpg" alt="എലി വല കടിക്കുന്നു" class="image">
+      <div class="bubble">എലികൾ ഓടിവന്നു! ഒന്നിച്ചു വല കടിച്ചു മുറിച്ചു...</div>
+    </div>
+  </div>
+
+  <!-- Scene 9 -->
+  <div class="scene" id="s9">
+    <div class="content">
+      <div class="bubble">"നന്ദി എന്റെ ചെറിയ സുഹൃത്തുക്കളേ! ഇനി ഞാൻ നിങ്ങളെ ഒരിക്കലും വേദനിപ്പിക്കില്ല."</div>
+    </div>
+  </div>
+
+  <!-- Scene 10 -->
+  <div class="scene" id="s10">
+    <div class="content">
+      <img src="https://as2.ftcdn.net/jpg/01/25/88/15/1000_F_125881559_5JpjFXGnm2tYgKSaLMVuZQCL9j1RKkEF.jpg" alt="ആനയും എലികളും സുഹൃത്തുക്കൾ" class="image">
+      <div class="bubble">അങ്ങനെ ആനയും എലികളും നല്ല സുഹൃത്തുക്കളായി സന്തോഷത്തോടെ ജീവിച്ചു.<br><br><strong>ഗുണപാഠം:</strong> വലുപ്പമല്ല, സൗഹൃദമാണ് ഏറ്റവും വലിയ ശക്തി!</div>
+    </div>
+  </div>
+
+  <!-- Scene 11 - End -->
+  <div class="scene" id="s11">
+    <div class="content">
+      <h1 class="title">അവസാനം</h1>
+      <div class="bubble">നിനക്ക് കഥ ഇഷ്ടപ്പെട്ടോ? 😊<br>വീണ്ടും വായിക്കാം!</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button id="prev">← മുൻപ്</button>
+  <button id="next">അടുത്തത് →</button>
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  const total = scenes.length;
+
+  function showScene(index) {
+    scenes.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    counter.textContent = index + 1;
+    document.getElementById('prev').disabled = index === 0;
+    document.getElementById('next').disabled = index === total - 1;
+  }
+
+  document.getElementById('next').onclick = () => {
+    if (current < total - 1) {
+      current++;
+      showScene(current);
+    }
+  };
+
+  document.getElementById('prev').onclick = () => {
+    if (current > 0) {
+      current--;
+      showScene(current);
+    }
+  };
+
+  // Swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', e => {
+    const touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 60) next.click();
+    if (touchEndX - touchStartX > 60) prev.click();
+  });
+
+  // Arrow keys
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') document.getElementById('next').click();
+    if (e.key === 'ArrowLeft') document.getElementById('prev').click();
+  });
+
+  // Start
+  showScene(0);
+</script>
+
+</body>
+</html>
